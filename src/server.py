@@ -1,4 +1,5 @@
-from flask import Flask
+from flask import Flask, jsonify
+from jsonschema import validate, ValidationError
 import uuid
 
 app = Flask(__name__)
@@ -15,6 +16,12 @@ def process_receipt():
 def get_receipt_points(id):
     return {"points": receipts[id]}
     
+@app.errorhandler(ValidationError)
+def handle_validation_error(e):
+    response = jsonify({"error": "BadRequest", "description": "No receipt found for that ID."})
+    response.status_code = 400  # Bad Request
+    return response
+
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -1,10 +1,17 @@
+"""
+This module contains the schema receipts must follow in order to be processed
+
+Author: Michael Kumicich
+Date:   February 4, 2025
+"""
+
 receipt_schema = {
     "type": "object",
     "properties": {
         "retailer": {
             "description": "The name of the retailer or store the receipt is from.",
             "type": "string",
-            "pattern": r"^[\\w\\s\\-&]+$"
+            "pattern": "^[\\w\\s\\-&]+$"
         },
         "purchaseDate": {
             "description": "The date of the purchase printed on the receipt.",
@@ -19,7 +26,7 @@ receipt_schema = {
         "total": {
             "description": "The total amount paid on the receipt.",
             "type": "string",
-            "pattern": r"^\\d+\\.\\d{2}$"
+            "pattern": "^\\d+\\.\\d{2}$"
         },
         "items": {
             "type": "array",
@@ -30,12 +37,12 @@ receipt_schema = {
                     "shortDescription": {
                         "description": "The Short Product Description for the item.",
                         "type": "string",
-                        "pattern": r"^[\\w\\s\\-]+$"
+                        "pattern": "^[\\w\\s\\-]+$"
                     },
                     "price": {
                         "description": "The total price payed for this item.",
                         "type": "string", 
-                        "pattern": r"^\\d+\\.\\d{2}$"
+                        "pattern": "^\\d+\\.\\d{2}$"
                     }
                 },
                 "required": ["shortDescription", "price"],
